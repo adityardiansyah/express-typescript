@@ -25,6 +25,9 @@ var App = /** @class */ (function () {
         this.app.use(cors_1.default());
     };
     App.prototype.routes = function () {
+        this.app.get('/', function (req, res) {
+            res.send('Ok');
+        });
         this.app.use('/users', UserRoutes_1.default);
     };
     return App;
