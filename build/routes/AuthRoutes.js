@@ -1,23 +1,33 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
+var BaseRouter_1 = __importDefault(require("../routes/BaseRouter"));
 //Import Controller
 var AuthController_1 = __importDefault(require("../controllers/AuthController"));
-var AuthRoutes = /** @class */ (function () {
+var AuthRoutes = /** @class */ (function (_super) {
+    __extends(AuthRoutes, _super);
     function AuthRoutes() {
-        this.router = express_1.Router();
-        this.routes();
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     AuthRoutes.prototype.routes = function () {
-        this.router.get('/', AuthController_1.default.index);
-        this.router.post('/', AuthController_1.default.create);
-        this.router.get('/:id', AuthController_1.default.show);
-        this.router.put('/:id', AuthController_1.default.update);
-        this.router.delete('/:id', AuthController_1.default.delete);
+        this.router.post('/', AuthController_1.default.register);
+        this.router.post('/', AuthController_1.default.login);
     };
     return AuthRoutes;
-}());
-exports.default = new UserRoutes().router;
+}(BaseRouter_1.default));
+exports.default = new AuthRoutes().router;

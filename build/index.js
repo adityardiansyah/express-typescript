@@ -9,13 +9,16 @@ var morgan_1 = __importDefault(require("morgan"));
 var compression_1 = __importDefault(require("compression"));
 var helmet_1 = __importDefault(require("helmet"));
 var cors_1 = __importDefault(require("cors"));
+var dotenv_1 = require("dotenv");
 // Route User
 var UserRoutes_1 = __importDefault(require("./routes/UserRoutes"));
+var AuthRoutes_1 = __importDefault(require("./routes/AuthRoutes"));
 var App = /** @class */ (function () {
     function App() {
         this.app = express_1.default();
         this.plugins();
         this.routes();
+        dotenv_1.config();
     }
     App.prototype.plugins = function () {
         this.app.use(body_parser_1.default.json());
@@ -28,6 +31,7 @@ var App = /** @class */ (function () {
         this.app.get('/', function (req, res) {
             res.send('Ok');
         });
+        this.app.use('/auth', AuthRoutes_1.default);
         this.app.use('/users', UserRoutes_1.default);
     };
     return App;
@@ -35,5 +39,5 @@ var App = /** @class */ (function () {
 var port = 8000;
 var app = new App().app;
 app.listen(port, function () {
-    console.log("Server running in port 8000");
+    console.log("Server running in port");
 });

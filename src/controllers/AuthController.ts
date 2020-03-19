@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
+const db = require('../db/models');
 
 class AuthController{
-    index(req: Request, res: Response): Response {
-        return res.send('');
+    register = async (req: Request, res: Response): Promise<Response> => {
+        let { username, password } = req.body;
+        const createdUser = await db.user.create({ username, password });
+
+        return res.send(createdUser);
     }
-    create(req: Request, res: Response): Response {
+    login(req: Request, res: Response): Response {
         return res.send('')
     }
 }
